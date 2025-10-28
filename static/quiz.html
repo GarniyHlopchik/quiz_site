@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Простой опрос</title>
+</head>
+
+<body>
+
+    <div id="poll-container">
+        <h1>Вопрос</h1>
+        <div id="poll-options">:
+            <form id="poll-options">
+                <div id="option">
+                    <input type="radio" id="opti1" name="opros1" value="option1">
+                    <label for="option1">option1</label><br>
+                </div>
+                <div id="option">
+                    <input type="radio" id="opti2" name="opros1" value="option2">
+                    <label for="option2">option2</label><br>
+                </div>
+                <div id="option">
+                    <input type="radio" id="opti3" name="opros1" value="option3">
+                    <label for="option3">option3</label><br>
+                </div>
+                <div id="option">
+                    <input type="radio" id="opti4" name="opros1" value="option4">
+                    <label for="option4">option4</label><br>
+            </form>
+        </div>
+        <button type="submit" form="poll-options" value="Submit">Golosovat</button>
+        <div id="results-container" style="display: none;">
+            <h3>Результаты:</h3>
+            <div id="results">
+            </div>
+
+            <script src="/static/quiz.js"></script>
+</body>
+
+</html>
