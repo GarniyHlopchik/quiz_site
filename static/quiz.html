@@ -1,39 +1,40 @@
 <!DOCTYPE html>
-
-<head>
-    <title>Простой опрос</title>
+<html lang="en"> <head>
+    <title>Opros</title>
 </head>
 
 <body>
-
-    <div id="poll-container">
-        <h1>Вопрос</h1>
-        <div id="poll-options">:
-            <form id="poll-options">
-                <div id="option">
-                    <input type="radio" id="opti1" name="opros1" value="option1">
-                    <label for="option1">option1</label><br>
+    <div id="quiz">
+        <h1>Vopros</h1>
+        
+        <div> 
+            <form id="quiz-form"> 
+                <div class="option"> 
+                    <input type="radio" id="opti1" name="opros" value="option1">
+                    <label for="opti1">option1</label>
                 </div>
-                <div id="option">
-                    <input type="radio" id="opti2" name="opros1" value="option2">
-                    <label for="option2">option2</label><br>
+                <div class="option">
+                    <input type="radio" id="opti2" name="opros" value="option2">
+                    <label for="opti2">option2</label>
                 </div>
-                <div id="option">
-                    <input type="radio" id="opti3" name="opros1" value="option3">
-                    <label for="option3">option3</label><br>
+                <div class="option">
+                    <input type="radio" id="opti3" name="opros" value="option3">
+                    <label for="opti3">option3</label>
                 </div>
-                <div id="option">
-                    <input type="radio" id="opti4" name="opros1" value="option4">
-                    <label for="option4">option4</label><br>
+                <div class="option">
+                    <input type="radio" id="opti4" name="opros" value="option4">
+                    <label for="opti4">option4</label>
+                </div>
+                <button type="submit">Otvet</button>
             </form>
         </div>
-        <button type="submit" form="poll-options" value="Submit">Golosovat</button>
+
         <div id="results-container" style="display: none;">
-            <h3>Результаты:</h3>
-            <div id="results">
-            </div>
+            <h3>Res:</h3>
+            <div id="results"></div>
+        </div>
+    </div>
 
-            <script src="/static/quiz.js"></script>
+    <script src="quiz.js"></script>
 </body>
-
 </html>
