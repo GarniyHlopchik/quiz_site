@@ -26,22 +26,13 @@ const SaveQuiz = () => {
 
 }
 const AddQuestion = () => {
-
-    // Clone the template
     const clone = question_template.content.cloneNode(true);
-
-    // Convert fragment -> actual added element
     const wrapper = clone.firstElementChild;
-
-    // Append to DOM
     created_questions_div.appendChild(clone);
-
-    // Now select options inside the newly added question
     const options = wrapper.querySelectorAll(".option");
 
     for (const opt of options) {
-        opt.name = String(question_counter); // for input elements
-        // or opt.setAttribute("name", String(question_counter));
+        opt.name = String(question_counter);
     }
 
     question_counter++;
