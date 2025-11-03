@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"> <head>
+    <title>Opros</title>
+</head>
+
+<body>
+    <div id="quiz">
+        <h1>Vopros</h1>
+        
+        <div> 
+            <form id="quiz-form"> 
+                <div class="option"> 
+                    <input type="radio" id="opti1" name="opros" value="option1">
+                    <label for="opti1">option1</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="opti2" name="opros" value="option2">
+                    <label for="opti2">option2</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="opti3" name="opros" value="option3">
+                    <label for="opti3">option3</label>
+                </div>
+                <div class="option">
+                    <input type="radio" id="opti4" name="opros" value="option4">
+                    <label for="opti4">option4</label>
+                </div>
+                <button type="submit">Otvet</button>
+            </form>
+        </div>
+
+        <div id="results-container" style="display: none;">
+            <h3>Res:</h3>
+            <div id="results"></div>
+        </div>
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
