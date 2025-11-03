@@ -5,6 +5,12 @@
   <title>Simple Quiz Site</title>
 </head>
 <body>
+    <template id = "quiz_template">
+        <div>
+            <label class = "quiz_name"></label>
+            <button class="complete_quiz">Пройти тест</button>
+        </div>
+    </template>
     <header>
         <h1>SimpleQuiz</h1>
     </header>
@@ -14,7 +20,8 @@
             <li><a href="edit.html">Редагувати Квізи</a></li>
         </ul>
     </nav>
-
     <div id="quizes"></div>
+    <script src="../src/main.js"></script>
+    
 </body>
 </html>
