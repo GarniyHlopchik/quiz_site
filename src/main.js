@@ -8,7 +8,7 @@ for(const quiz of JSON.parse(localStorage.getItem("quizes") || "[]")){
     quiz_element.querySelector(".quiz_name").textContent = quiz.name;
     quiz_element.querySelector(".complete_quiz").quiz_to_load = quiz;
     quiz_element.querySelector(".complete_quiz").addEventListener("click", (event) => {
-        localStorage.setItem("current_quiz",event.target.quiz_to_load);
+        localStorage.setItem("current_quiz", JSON.stringify(event.target.quiz_to_load));
         window.location.assign("../static/quiz.html");
     });
 }
