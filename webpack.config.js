@@ -50,6 +50,10 @@ module.exports = {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.html$/,
+        use: 'html-loader', // 👈 enables import of HTML templates as strings
+      },
     ],
   },
   plugins: [

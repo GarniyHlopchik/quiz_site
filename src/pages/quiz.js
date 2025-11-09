@@ -1,4 +1,11 @@
-"use strict"
+import modalHTML from '../templates/test.html';
+
+const wrapper = document.createElement('div');
+wrapper.innerHTML = modalHTML.trim();
+document.body.appendChild(wrapper.firstElementChild);
+//видалити потім, просто приклад як тепер юзати темплейти
+
+
 //const quizForm = document.getElementById('quiz-form');
 //const resultsContainer = document.getElementById('results-container');
 const quiz_template = document.getElementById("quiz");
