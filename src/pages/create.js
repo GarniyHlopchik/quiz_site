@@ -1,4 +1,4 @@
-"use strict"
+import '../../css/style.css';
 let question_counter = 0;
 const add_question_button = document.getElementById("add_question");
 const question_template = document.getElementById("question_template");
@@ -26,6 +26,7 @@ const SaveQuiz = () => {
 
 }
 const AddQuestion = () => {
+    //create instance of template when it's ready
     const clone = question_template.content.cloneNode(true);
     const wrapper = clone.firstElementChild;
     created_questions_div.appendChild(clone);
@@ -36,4 +37,17 @@ const AddQuestion = () => {
     }
 
     question_counter++;
+    //then add button to add new option
+    console.log(wrapper);
+    const add_option_button = document.createElement("button");
+    add_option_button.textContent = "Додати Варіант";
+    wrapper.appendChild(add_option_button);
+    add_option_button.addEventListener("click",() => {
+    AddOption(wrapper);
+});
 };
+
+const AddOption = (wrapper) => {
+    //add from template when it's done
+    return
+}
