@@ -1,7 +1,6 @@
-"use strict"
-console.log("home");
+import quiz_template from "../templates/quiz_browse.html"
 const quizes_div = document.getElementById("quizes");
-const quiz_template = document.getElementById("quiz_template");
+//replace with call of storage when it exists
 for(const quiz of JSON.parse(localStorage.getItem("quizes") || "[]")){
     const quiz_element = quiz_template.content.cloneNode(true).firstElementChild;
     quizes_div.appendChild(quiz_element);
@@ -9,7 +8,7 @@ for(const quiz of JSON.parse(localStorage.getItem("quizes") || "[]")){
     quiz_element.querySelector(".complete_quiz").quiz_to_load = quiz;
     quiz_element.querySelector(".complete_quiz").addEventListener("click", (event) => {
         localStorage.setItem("current_quiz", JSON.stringify(event.target.quiz_to_load));
-        window.location.assign("./quiz.html");
+        window.location.assign("/quiz.html");
     });
 }
 
