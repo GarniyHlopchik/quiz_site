@@ -1,17 +1,13 @@
-import modalHTML from '../templates/test.html';
-
-const wrapper = document.createElement('div');
-wrapper.innerHTML = modalHTML.trim();
-document.body.appendChild(wrapper.firstElementChild);
-//видалити потім, просто приклад як тепер юзати темплейти
-
+import "../../css/style.css";
+import {getCurrentQuiz, getQuiz} from "../utils/storage";
 
 //const quizForm = document.getElementById('quiz-form');
 //const resultsContainer = document.getElementById('results-container');
 const quiz_template = document.getElementById("quiz");
 const questions_div = document.getElementById("questions");
 //spawn quiz from localstorage
-const quiz_obj = JSON.parse(localStorage.getItem("current_quiz"));
+console.log(getCurrentQuiz());
+const quiz_obj = getQuiz(getCurrentQuiz());
 console.log(quiz_obj);
 console.log(quiz_obj.questions, Array.isArray(quiz_obj.questions));
 for(const question of quiz_obj.questions){
