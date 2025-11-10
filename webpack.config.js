@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 //
-// 🔍 Automatically detect all HTML files in "static" folder
+//  Automatically detect all HTML files in "static" folder
 // and generate an entry + HTML plugin for each.
 //
 const htmlFiles = fs.readdirSync(path.resolve(__dirname, "static"))
@@ -26,7 +26,7 @@ for (const file of htmlFiles) {
       })
     );
   } else {
-    console.warn(`⚠️ No JS entry found for ${file}, skipping`);
+    console.warn(` No JS entry found for ${file}, skipping`);
   }
 }
 
@@ -52,7 +52,7 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: 'html-loader', // 👈 enables import of HTML templates as strings
+        use: 'html-loader', //  enables import of HTML templates as strings
       },
     ],
   },
