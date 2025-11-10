@@ -1,4 +1,5 @@
 import '../../css/style.css';
+import {addQuiz} from "../utils/storage.js"
 let question_counter = 0;
 const add_question_button = document.getElementById("add_question");
 const question_template = document.getElementById("question_template");
@@ -20,9 +21,8 @@ const SaveQuiz = () => {
         const obj = Object.fromEntries(data.entries());
         quiz_obj.questions.push(obj);
     }
-    let arr = JSON.parse(localStorage.getItem("quizes")) || [];
-    arr.push(quiz_obj);
-    localStorage.setItem("quizes", JSON.stringify(arr));
+    //changed to using storage
+    addQuiz(quiz_obj);
 
 }
 const AddQuestion = () => {
