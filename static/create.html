@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+<html>
+    <head>
+        <title>Create Quiz</title>
+    </head>
+    <body>
+        <template id="question_template">
+            <form id="question_form" class="question">
+                <input name = "question_text" type="text" id="question_text" placeholder="type question text here">
+                <input name="option1_text" type="text" id="option1_text" placeholder="variant1">
+                <input type="radio" class="option" value="1">
+                <input name ="option2_text" type="text" id="option2_text" placeholder="variant2">
+                <input type="radio" class="option" value="2">
+                <input name = "option3_text" type="text" id="option3_text" placeholder="variant3">
+                <input type="radio" class="option" value="3">
+                <input name="option4_text" type="text" id="option4_text" placeholder="variant4">
+                <input type="radio" class="option" value="4">
+            </form>
+        </template>
+        <h1>Create Quiz</h1>
+        <aside>
+            <button id="add_question"> Add new question </button>
+            <br>
+            <button id="save_quiz"> Save Quiz</button>
+        </aside>
+        <input id="quiz_name" type="text" placeholder="Назва квізу">
+        <div id="created_questions">
+
+        </div>
+    </body>
+    
+</html>

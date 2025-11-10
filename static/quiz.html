@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"> <head>
+    <title>Opros</title>
+</head>
+
+<body>
+    <template id="quiz">
+        <div>
+        <h1 class="question_text">Vopros</h1>
+        
+        <div> 
+            <form id="quiz-form"> 
+                <div> 
+                    <input type="radio" class="option" value="1">
+                    <label class="option_text">option1</label>
+                </div>
+                <div class="option">
+                    <input type="radio" class="option" value="2">
+                    <label class="option_text">option2</label>
+                </div>
+                <div class="option">
+                    <input type="radio" class="option" value="3">
+                    <label class="option_text">option3</label>
+                </div>
+                <div class="option">
+                    <input type="radio" class="option" value="4">
+                    <label class="option_text">option4</label>
+                </div>
+                <button class="submit_button" type="submit">Otvet</button>
+            </form>
+        </div>
+
+        <div id="results-container" style="display: none;">
+            <h3>Res:</h3>
+            <div class="results"></div>
+        </div>
+        </div>
+    </template>
+    <div id="questions"></div>
+</body>
+</html>
