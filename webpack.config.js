@@ -29,7 +29,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './static/index.html', // твій головний HTML
+      template: './static/index.html',
     }),
   ],
   resolve: {
