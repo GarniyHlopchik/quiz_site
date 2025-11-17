@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
-const Quiz = ({ quiz_id }) => {
+import { useLocation } from 'react-router-dom';
+const Quiz = () => {
+  const { quiz_id } = useLocation();
   const [quiz, setQuiz] = useState(null);
   const [userAnswers, setUserAnswers] = useState({});
   const [result, setResult] = useState(null);
@@ -121,7 +122,7 @@ const Quiz = ({ quiz_id }) => {
   return (
     <div className="quiz-container">
       <h1 className="quiz-title">{quiz.title}</h1>
-      <p className="quiz-description">{quiz.description}</p>
+      {/*<p className="quiz-description">{quiz.description}</p>   -- дескріпшн не робимо поки  */}
       
       
       {quiz.questions.map((question, questionIndex) => (

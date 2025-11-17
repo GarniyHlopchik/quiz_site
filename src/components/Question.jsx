@@ -1,17 +1,25 @@
 import React from "react";
 import { Option } from "./Option";
 import { getQuiz } from "../utils/storage";
-export function Question({ question, onSelect}) {
-    const [options_selected, setSelectedArr] = useState()
-    return (
+import { useState } from "react";
+export function Question() {
+    const [options, setOption] = useState([])
+    const [question_title, setQuestionTitle] = useState("");
+    function AddOption(){
+        setOption([...options, <Option/>])
+    }
+    return(
         <div>
-        {GenerateQuestions(question)}
+        <input type="text" 
+        placeholder="Enter question text" 
+        value={question_title} 
+        onChange={(e)=>{setQuestionTitle(e.target.value)}}
+        />
+        <button onClick={AddOption()}>Додати Варіант</button>
+
+        {options.map((option, index) => (
+        <div key={index}>{option}</div>
+      ))}
         </div>
     )
-}
-function GenerateQuestions(question){
-    const option_elements = [];
-    for(const o of question.options){
-        question_elements.push(<Option option={o} onSelect={onSelect} />);
-    }
 }
