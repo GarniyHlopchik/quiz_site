@@ -4,13 +4,16 @@ import { getQuiz } from '../utils/storage';
 const Quiz = () => {
   const location = useLocation();
   const { quiz_id } = location.state ?? {};
-  const [quiz, setQuiz] = useState(null);
+  const quiz = getQuiz(quiz_id);
+  console.log(quiz_id);
+  console.log(quiz);
+  //const [quiz, setQuiz] = useState(null);
   const [userAnswers, setUserAnswers] = useState({});
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
+/*
   useEffect(() => {
     const loadQuiz = async () => {
       try {
@@ -41,7 +44,7 @@ const Quiz = () => {
 
     }
   }, [quiz_id]);
-
+*/
  
   const handleAnswerSelect = (questionIndex, answerIndex, questionType) => {
     setUserAnswers(prev => {
@@ -70,7 +73,7 @@ const Quiz = () => {
     
     questions.forEach((question, questionIndex) => {
       const userAnswer = answers[questionIndex];
-      const correctAnswers = question.answers
+      const correctAnswers = question.options
         .map((answer, index) => answer.correct ? index : -1)
         .filter(index => index !== -1);
       
@@ -103,7 +106,7 @@ const Quiz = () => {
         text: question.text,
         type: question.type,
         userAnswer: userAnswers[questionIndex],
-        correctAnswers: question.answers
+        correctAnswers: question.options
           .map((answer, index) => answer.correct ? index : -1)
           .filter(index => index !== -1)
       }))
@@ -122,13 +125,15 @@ const Quiz = () => {
     
     console.log('Quiz results:', quizResults);
   };
-
+  
+  if (!quiz) return <div>Loading quiz...</div>;
   return (
     <div className="quiz-container">
       <h1 className="quiz-title">{quiz.title}</h1>
       {/*<p className="quiz-description">{quiz.description}</p>   -- дескріпшн не робимо поки  */}
       
-      
+      {console.log(quiz)}
+      {console.log(quiz.questions)}
       {quiz.questions.map((question, questionIndex) => (
         <div key={question.id || questionIndex} className="question-container">
           <h3 className="question-text">
@@ -136,7 +141,7 @@ const Quiz = () => {
           </h3>
           
           <div className="answers-container">
-            {question.answers.map((answer, answerIndex) => (
+            {question.options.map((answer, answerIndex) => (
               <div key={answerIndex} className="answer-option">
                 <label className="answer-label">
                   <input
