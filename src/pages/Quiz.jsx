@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { getQuiz } from '../utils/storage';
 const Quiz = () => {
-  const { quiz_id } = useLocation();
+  const location = useLocation();
+  const { quiz_id } = location.state ?? {};
   const [quiz, setQuiz] = useState(null);
   const [userAnswers, setUserAnswers] = useState({});
   const [result, setResult] = useState(null);
@@ -35,6 +37,8 @@ const Quiz = () => {
 
     if (quiz_id) {
       loadQuiz();
+      
+
     }
   }, [quiz_id]);
 

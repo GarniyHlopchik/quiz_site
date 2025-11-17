@@ -1,20 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Question } from '../components/Question';
-export function Create(){
-    const [questions, setQuestions] = useState([]);
-    const [quiz_title, SetTitle] = useState("");
-    function AddQuestion() {
-        setQuestions([...questions, <Question/>]);
-    }
-    return(
-        <div>
-            <input type='text' value={quiz_title} placeholder='Enter Quiz Name Here' onChange={(e) => SetTitle(e.target.value)}/>
-            <button onClick={AddQuestion()}>Додати питання</button>
-            <button>Зберегти квіз</button>
+import { addQuiz } from '../utils/storage';
 
-            {questions.map((item, index) => (
-                <div key={index}>{item}</div>
-            ))}
-        </div>
-    )
+export function Create() {
+  const [quizTitle, setQuizTitle] = useState("");
+  const [questions, setQuestions] = useState([]);
+
+  // Додаємо нове питання
+  function addQuestion() {
+    setQuestions([
+      ...questions,
+      { id: Date.now(), text: "", options: [] }
+    ]);
+  }
+
+  // Оновлюємо дані конкретного питання
+  function setQuestionData(index, data) {
+    const newQuestions = [...questions];
+    newQuestions[index] = { ...newQuestions[index], ...data };
+    setQuestions(newQuestions);
+  }
+
+  // Зберегти квіз
+  function saveQuiz() {
+    const obj = { title: quizTitle, questions };
+    addQuiz(obj);
+    console.log("Quiz saved:", obj);
+  }
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={quizTitle}
+        placeholder="Enter Quiz Name Here"
+        onChange={(e) => setQuizTitle(e.target.value)}
+      />
+      <button onClick={addQuestion}>Додати питання</button>
+      <button onClick={saveQuiz}>Зберегти квіз</button>
+
+      {questions.map((q, index) => (
+        <Question
+          key={q.id}
+          index={index}
+          questionData={q}
+          setQuestionData={setQuestionData}
+        />
+      ))}
+    </div>
+  );
 }
