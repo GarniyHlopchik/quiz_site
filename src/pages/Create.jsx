@@ -29,15 +29,16 @@ export function Create() {
   }
 
   return (
-    <div>
+    <div className='container-fluid'>
       <input
+      className='form-control'
         type="text"
         value={quizTitle}
         placeholder="Enter Quiz Name Here"
         onChange={(e) => setQuizTitle(e.target.value)}
       />
-      <button onClick={addQuestion}>Додати питання</button>
-      <button onClick={saveQuiz}>Зберегти квіз</button>
+      <button className='btn btn-primary' onClick={addQuestion}>Додати питання</button>
+      <button className='btn btn-secondary' onClick={saveQuiz}>Зберегти квіз</button>
 
       {questions.map((q, index) => (
         <Question

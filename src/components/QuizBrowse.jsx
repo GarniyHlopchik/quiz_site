@@ -12,9 +12,9 @@ export function QuizBrowse({ quiz_id }) {
   }
 
   return (
-    <div>
-      <label>{quiz_title}</label>
-      <button onClick={completeQuiz}>Пройти тест</button>
+    <div className='row my-4' style={{height:80}}>
+      <label className='col-sm-8'>{quiz_title}</label>
+      <button className='col-sm-4 btn btn-primary'onClick={completeQuiz}>Пройти тест</button>
     </div>
   );
 }

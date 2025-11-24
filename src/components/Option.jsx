@@ -12,15 +12,17 @@ export function Option({ index, optionData, setOptionData }) {
   }, [text, isSelected]);
 
   return (
-    <div>
+    <div className="container row">
       <input
+        className="form-control col"
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Enter option text"
       />
-      <label>
+      <label className="col">
         <input
+        className="form-check-input "
           type="checkbox"
           checked={isSelected}
           onChange={(e) => setIsSelected(e.target.checked)}

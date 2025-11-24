@@ -168,7 +168,7 @@ const Quiz = () => {
       <div className="quiz-actions">
         <button 
           onClick={handleSubmit}
-          className="submit-button"
+          className="submit-button btn btn-primary"
           disabled={!quiz.questions.length}
         >
           Check Answers

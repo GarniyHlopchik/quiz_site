@@ -18,8 +18,9 @@ export function Question({ index, questionData, setQuestionData }) {
   }
 
   return (
-    <div>
+    <div className="container row">
       <input
+      className="form-control col"
         type="text"
         value={text}
         placeholder="Enter question text"
@@ -27,7 +28,7 @@ export function Question({ index, questionData, setQuestionData }) {
           setQuestionData(index, { ...questionData, text: e.target.value, options })
         }
       />
-      <button onClick={addOption}>Додати Варіант</button>
+      <button className="btn btn-secondary col-4" onClick={addOption}>Додати Варіант</button>
 
       {options.map((opt, i) => (
         <Option
