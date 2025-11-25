@@ -39,7 +39,7 @@ export function Create() {
       />
       <button className='btn btn-primary' onClick={addQuestion}>Додати питання</button>
       <button className='btn btn-secondary' onClick={saveQuiz}>Зберегти квіз</button>
-
+      
       {questions.map((q, index) => (
         <Question
           key={q.id}
