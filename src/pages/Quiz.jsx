@@ -18,12 +18,12 @@ const Quiz = () => {
     const loadQuiz = async () => {
       try {
         setLoading(true);
-       
+
         const response = await fetch(`/api/quizzes/${quiz_id}`);
         const quizData = await response.json();
         setQuiz(quizData);
         
-       
+        
         const initialAnswers = {};
         quizData.questions.forEach((question, index) => {
           initialAnswers[index] = question.type === 'multiple' ? [] : '';

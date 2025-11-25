@@ -5,7 +5,6 @@ import Quiz from "./pages/Quiz.jsx";
 import {Create} from "./pages/Create.jsx";
 
 export default function App() {
-  //localStorage.clear()
   return (
     <div className='container my-20'>
       <h1>BobaQuiz</h1>
