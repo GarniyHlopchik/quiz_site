@@ -10,6 +10,14 @@ module.exports = {
     publicPath: '/', // для SPA роутів
   },
   devServer: {
+    proxy: [
+      {
+        context: ['/api'],            // paths to proxy
+        target: 'http://localhost:8000',  // backend URL
+        changeOrigin: true,
+        secure: false,
+      },
+    ],
     static: './dist',
     historyApiFallback: true, // щоб працювали React Router маршрути
     open: true,
