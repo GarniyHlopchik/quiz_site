@@ -1,16 +1,15 @@
-from fastapi import FastAPI
-from sqlalchemy.orm import sessionmaker, Session
-from sqlalchemy import create_engine
-from fastapi import Depends
-from models import Quiz, Base
-from pydantic import BaseModel
+from fastapi import FastAPI, HTTPException, Depends
+from sqlalchemy.orm import sessionmaker, Session, declarative_base, relationship, selectinload
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from models import Quiz, Base, Question, Option
+from pydantic import BaseModel, Field, ConfigDict
+from typing import List
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./database.db"
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
-)
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base.metadata.create_all(bind=engine)
-app = FastAPI()
+# Base.metadata.create_all(bind=engine)
+# app = FastAPI()
 
 def get_db():
     db = SessionLocal()
@@ -21,20 +20,56 @@ def get_db():
 
 
 #приклад обробки запиту з використанням бази даних
-@app.get("/api/get_quiz/{id}")
+@app.get("/api/get_quiz/{id}", response_model=QuizData)
 def get_quiz(id: int, db: Session = Depends(get_db)):
+    quiz = db.query(Quiz).options(
+        selectinload(Quiz.questions).selectinload(Question.options)""" Жёстко высасываем данные с связями """
+    ).filter(Quiz.id == id).first()
+    if not quiz:""" Если у нас протечка даём 404 и пусть сам решает что делать """
+        raise HTTPException(status_code=404, detail="Quiz not found")""" Собсвтенно 404 """
     return db.query(Quiz).filter(Quiz.id == id).first()
     # запит до записів з моделі Quiz де id відповідає нашому, перший 
 
 #також приклад з POST, який додає запис із даним тайтлом
 
 #таким класом визначається структура даних, що приходять з фронтенду
+""" Варианты ответов """
+class OptionData(BaseModel):
+    text: str
+    correct: bool
+    
+    class Config:
+        from_attributes = True """ Прикол из Pydantic чтобы он понимал SQLAlchemy модели """
+"""  вопсос с вариантами ответов """
+class QuestionData(BaseModel):
+    text: str
+    options: list[OptionData]
+    
+    class Config:
+        from_attributes = True
+
+""" Викторина с вопросами """
 class QuizData(BaseModel):
     title: str
-@app.post("/api/add_quiz/")
+    questions: list[QuestionData]
+    
+    class Config:
+        from_attributes = True
+
+
+@app.post("/api/add_quiz/", response_model=QuizData)
 def add_quiz(quiz_data: QuizData, db: Session = Depends(get_db)):
     new_quiz = Quiz(title=quiz_data.title)
+    for question_data in quiz_data.questions: """ Перебираем вопросы из пришедших данных """
+        new_question = Question(text=question_data.text, quiz=new_quiz) """ Создаём новый вопрос и связываем его с квизом """
+        for option_data in question_data.options: """ Перебираем варианты ответов из пришедших данных """
+            new_option = Option(text=option_data.text, correct=option_data.correct, question=new_question) """ Создаём новый вариант ответа и связываем его с вопросом """
+            new_question.options.append(new_option) """ Добавляем вариант ответа в список вариантов вопроса """
+        new_questions.append(new_question) """ Добавляем вопрос в список вопросов квиза """
+
+    db.add(new_option)
+    db.add(new_question)
     db.add(new_quiz)
     db.commit()
     db.refresh(new_quiz) #підбирає з бд уже з визначеним айдішником
-    return new_quiz 
+    return new_quiz """ Возвращаем созданный квиз """
