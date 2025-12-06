@@ -21,12 +21,36 @@ export function Create() {
     setQuestions(newQuestions);
   }
 
-  // Зберегти квіз
-  function saveQuiz() {
-    const obj = { title: quizTitle, questions };
-    addQuiz(obj);
-    console.log("Quiz saved:", obj);
-  }
+// Зберегти квіз
+function saveQuiz() {
+  const obj = { title: quizTitle, questions };
+  fetch("/api/add_quiz", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj)
+  })
+  .then(response => {
+    // Check if the response was successful (HTTP status 200-299)
+    if (!response.ok) {
+      // Throw an error to be caught by the .catch() block
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    // Handle successful response (e.g., parse JSON, return data)
+    return response.json(); 
+  })
+  .then(data => {
+    console.log("Quiz saved successfully:", data);
+  })
+  .catch(error => {
+    // This catches the 'Failed to fetch' network error
+    // AND the error thrown if response.ok is false
+    console.error("Fetch Error:", error.message);
+  });
+
+  console.log("Quiz data sent:", obj); // Note: This will execute before the fetch completes.
+}
 
   return (
     <div className='container-fluid'>

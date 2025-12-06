@@ -4,22 +4,21 @@ import { getQuiz } from '../utils/storage';
 const Quiz = () => {
   const location = useLocation();
   const { quiz_id } = location.state ?? {};
-  const quiz = getQuiz(quiz_id);
   console.log(quiz_id);
   console.log(quiz);
-  //const [quiz, setQuiz] = useState(null);
+  const [quiz, setQuiz] = useState(null);
   const [userAnswers, setUserAnswers] = useState({});
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-/*
+
   useEffect(() => {
     const loadQuiz = async () => {
       try {
         setLoading(true);
 
-        const response = await fetch(`/api/quizzes/${quiz_id}`);
+        const response = await fetch(`/api/get_quiz/${quiz_id}`);
         const quizData = await response.json();
         setQuiz(quizData);
         
@@ -44,7 +43,7 @@ const Quiz = () => {
 
     }
   }, [quiz_id]);
-*/
+
  
   const handleAnswerSelect = (questionIndex, answerIndex, questionType) => {
     setUserAnswers(prev => {
