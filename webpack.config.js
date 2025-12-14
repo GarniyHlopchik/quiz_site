@@ -1,74 +1,39 @@
-const path = require("path");
-const fs = require("fs");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-
-//
-// 🔍 Automatically detect all HTML files in "static" folder
-// and generate an entry + HTML plugin for each.
-//
-const htmlFiles = fs.readdirSync(path.resolve(__dirname, "static"))
-  .filter(file => file.endsWith(".html"));
-
-const entries = {};
-const htmlPlugins = [];
-
-for (const file of htmlFiles) {
-  const name = path.basename(file, ".html");
-  const jsPath = `./src/pages/${name}.js`;
-  if (fs.existsSync(jsPath)) {
-    entries[name] = jsPath;
-    htmlPlugins.push(
-      new HtmlWebpackPlugin({
-        template: `./static/${file}`,
-        filename: `${file}`,
-        chunks: [name],
-      })
-    );
-  } else {
-    console.warn(`⚠️ No JS entry found for ${file}, skipping`);
-  }
-}
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: entries,
+  entry: './src/index.js', // тепер один вхідний файл
   output: {
-    filename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, "dist"),
+    filename: 'bundle.[contenthash].js',
+    path: path.resolve(__dirname, 'dist'),
     clean: true,
+    publicPath: '/', // для SPA роутів
+  },
+  devServer: {
+    static: './dist',
+    historyApiFallback: true, // щоб працювали React Router маршрути
+    open: true,
   },
   module: {
     rules: [
       {
-        test: /\.js$/i,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
+        use: 'babel-loader',
       },
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.html$/,
-        use: 'html-loader', // 👈 enables import of HTML templates as strings
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
-    ...htmlPlugins,
+    new HtmlWebpackPlugin({
+      template: './static/index.html',
+    }),
   ],
-  optimization: {
-    splitChunks: { chunks: "all" },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, "dist"),
-    },
-    port: 8080,
-    open: true,
-  },
-  mode: "development",
+  mode: 'development'
 };

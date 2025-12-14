@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@700&display=swap');
+body {
+    margin: 0;              /* remove default browser margin */
+    padding: 0 100px;        /* horizontal padding for the whole page */
+    box-sizing: border-box; /* ensure padding doesn't break widths */
+    background-color: #f9f9f9; /* optional light background */
+}
+
+/* Ensure all elements include padding/border in width calculations */
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+/* Apply fonts to headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #333; /* dark grey headings */
+    margin: 0.5em 0;
+}
+
+/* Apply fonts to normal text */
+body, p, span, label, div {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #444; /* slightly lighter grey */
+}
+
+/* Optional: improve readability for labels inside .quiz_browse */
+.quiz_browse label {
+    font-weight: 500;
+}
+.quiz_browse {
+    width: calc(100% - 20px); /* full width minus horizontal margins */
+    height: 100px;
+    margin: 0 10px;           
+    padding: 0px 0;          /* only vertical padding if needed, horizontal handled by margin */
+    display: flex;            
+    gap: 10px;                
+    border-radius: 8px;       
+    border: 1px solid #ccc;   
+    box-sizing: border-box;   
+    align-items: stretch;     /* make children take full height */
+}
+
+.quiz_browse > * {
+    flex: 1;                  
+    text-align: center;       
+    display: flex;            
+    align-items: center;      
+    justify-content: center;  
+    margin: 0;                /* remove any default margin */
+}
+
+/* Button styles */
+.quiz_browse button {
+    width: 100%;              
+    height: 100%;             
+    margin: 0;                /* remove default margin */
+    border: none;             
+    border-radius: 6px;       
+    color: white;             
+    font-weight: bold;
+    cursor: pointer;          
+    transition: background 0.3s;
+    box-sizing: border-box;   /* ensure padding doesn’t break height */
+}
+
+/* Individual button colors */
+.complete_quiz {
+    background-color: #5bc0de; 
+}
+
+.edit_quiz {
+    background-color: #28a745; 
+}
+
+.remove_quiz {
+    background-color: #dc3545; 
+}
+
+/* Hover effect */
+.quiz_browse button:hover {
+    filter: brightness(1.1);
+}

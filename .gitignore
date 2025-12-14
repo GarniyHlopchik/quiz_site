@@ -1,12 +1,27 @@
+#frontend
+
 # Dependencies
-node_modules/
+frontend/node_modules/
 
 # Build output
-dist/
+frontemd/dist/
 
 # IDE and OS files
-.vscode/
-.DS_Store
+frontend/.vscode/
+frontend/.DS_Store
 
 # Logs
-npm-debug.log*
+frontend/npm-debug.log*
+
+#backend
+
+# Python virtual environment
+/backend/venv/
+
+# Python cache
+**/__pycache__/
+**/*.pyc
+
+# Python packages cache
+/backend/.pytest_cache/
+.backend/.mypy_cache/
