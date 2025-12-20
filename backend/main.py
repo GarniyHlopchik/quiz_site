@@ -12,8 +12,8 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base.metadata.create_all(bind=engine)
 origins = [
     "http://localhost",
-    "http://localhost:8080", # This is the origin you need to allow
-    "https://bobaquiz.com", # Add your production domain here later
+    "http://localhost:8080", 
+    "https://bobaquiz.com", 
 ]
 app = FastAPI()
 app.add_middleware(
@@ -98,3 +98,12 @@ def add_quiz(quiz_data: QuizData, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_quiz) #підбирає з бд уже з визначеним айдішником
     return new_quiz # Возвращаем созданный квиз """
+@app.delete("/api/delete_quiz/{id}")
+def delete_quiz(id: int, db: Session = Depends(get_db)):
+    quiz = db.query(Quiz).filter(Quiz.id == id).first()
+    if not quiz:
+        return False
+    else:
+        db.delete(quiz)
+        db.commit()
+        return True

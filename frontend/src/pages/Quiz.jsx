@@ -4,8 +4,6 @@ import { getQuiz } from '../utils/storage';
 const Quiz = () => {
   const location = useLocation();
   const { quiz_id } = location.state ?? {};
-  console.log(quiz_id);
-  console.log(quiz);
   const [quiz, setQuiz] = useState(null);
   const [userAnswers, setUserAnswers] = useState({});
   const [result, setResult] = useState(null);
@@ -45,11 +43,11 @@ const Quiz = () => {
   }, [quiz_id]);
 
  
-  const handleAnswerSelect = (questionIndex, answerIndex, questionType) => {
+  const handleAnswerSelect = (questionIndex, answerIndex, isMultiple) => {
     setUserAnswers(prev => {
       const newAnswers = { ...prev };
       
-      if (questionType === 'multiple') {
+      if (isMultiple) {
         
         const currentAnswers = newAnswers[questionIndex] || [];
         if (currentAnswers.includes(answerIndex)) {
@@ -76,7 +74,7 @@ const Quiz = () => {
         .map((answer, index) => answer.correct ? index : -1)
         .filter(index => index !== -1);
       
-      if (question.type === 'multiple') {
+      if (isMultipleChoice(question)) {
        
         if (userAnswer && userAnswer.length === correctAnswers.length &&
             userAnswer.every(answer => correctAnswers.includes(answer))) {
@@ -144,15 +142,16 @@ const Quiz = () => {
               <div key={answerIndex} className="answer-option">
                 <label className="answer-label">
                   <input
-                    type={question.type === 'multiple' ? 'checkbox' : 'radio'}
+                    type={isMultipleChoice(question) ? 'checkbox' : 'radio'}
                     name={`question-${questionIndex}`}
                     value={answerIndex}
                     checked={
-                      question.type === 'multiple'
-                        ? userAnswers[questionIndex]?.includes(answerIndex) || false
+                      isMultipleChoice(question)
+                        ? Array.isArray(userAnswers[questionIndex]) &&
+                        userAnswers[questionIndex].includes(answerIndex)
                         : userAnswers[questionIndex] === answerIndex
                     }
-                    onChange={() => handleAnswerSelect(questionIndex, answerIndex, question.type)}
+                    onChange={() => handleAnswerSelect(questionIndex, answerIndex, isMultipleChoice(question))}
                     className="answer-input"
                   />
                   <span className="answer-text">{answer.text}</span>
@@ -185,5 +184,10 @@ const Quiz = () => {
     </div>
   );
 };
+function isMultipleChoice(question) {
+  if (!question?.options) return false;
 
+  const correctCount = question.options.filter(opt => opt.correct).length;
+  return correctCount > 1;
+}
 export default Quiz;
