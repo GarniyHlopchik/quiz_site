@@ -18,6 +18,9 @@ frontend/npm-debug.log*
 # Python virtual environment
 /backend/venv/
 
+#db
+/backend/database.db
+
 # Python cache
 **/__pycache__/
 **/*.pyc
@@ -25,3 +28,4 @@ frontend/npm-debug.log*
 # Python packages cache
 /backend/.pytest_cache/
 .backend/.mypy_cache/
+
