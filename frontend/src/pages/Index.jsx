@@ -60,7 +60,7 @@ export function Index() {
         <div>
             <h1>Available Quizzes</h1>
             {quizzes.map(q => (
-                <QuizBrowse key={q.id} quiz={q} quiz_id={q.id} />
+                <QuizBrowse key={q.id} quiz={q} quiz_id={q.id} setQuizzes={setQuizzes}/>
             ))}
         </div>
     );

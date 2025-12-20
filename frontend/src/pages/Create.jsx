@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Question } from '../components/Question';
 import { addQuiz } from '../utils/storage';
-
+import { useNavigate } from "react-router-dom";
 export function Create() {
   const [quizTitle, setQuizTitle] = useState("");
   const [questions, setQuestions] = useState([]);
-
+  const navigate = useNavigate();
   // Додаємо нове питання
   function addQuestion() {
     setQuestions([
@@ -23,6 +23,7 @@ export function Create() {
 
 // Зберегти квіз
 function saveQuiz() {
+  
   const obj = { title: quizTitle, questions };
   fetch("/api/add_quiz", {
     method: 'POST',
@@ -50,6 +51,7 @@ function saveQuiz() {
   });
 
   console.log("Quiz data sent:", obj); // Note: This will execute before the fetch completes.
+  navigate("/");
 }
 
   return (
